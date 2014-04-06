@@ -254,12 +254,15 @@ if not digger or not digger:get_inventory() then return end
             local poss = {x = pos.x+math.random(-0.5,0.5), y = pos.y+0.5, z = pos.z+math.random(-0.5,0.5)}
                 if WORM_IS_MOB == true then
                     for i=1, dirts[oldnode.name] do
+                        local poss = {x = pos.x+math.random(-0.5,0.5), y = pos.y+0.5, z = pos.z+math.random(-0.5,0.5)}
                         minetest.add_entity(poss, "fishing:bait_worm_entity")
                     end
                 else
                     -- drop worms instead of automatically ading to the pl:inv
-                    minetest.item_drop("fishing:bait_worm "..dirts[oldnode.name], digger, poss)
-                   -- drop_items(poss, dirts[oldnode.name], "fishing:bait_worm")
+                    for i=1, dirts[oldnode.name] do
+                        local poss = {x = pos.x+math.random(-0.5,0.5), y = pos.y+0.5, z = pos.z+math.random(-0.5,0.5)}
+                        minetest.item_drop("fishing:bait_worm", digger, poss)
+                    end
                 end
             end
         end
